@@ -1,0 +1,27 @@
+INÍCIO
+    DEFINIR N = 10_000_000  // Muitas repetições para medição precisa
+    DEFINIR variável a
+    DEFINIR caractere c = 'a'
+
+    // Medir tempo de atribuições
+    INICIAR_CRONÔMETRO
+    REPETIR N VEZES:
+        a = 1 + 2
+    PARAR_CRONÔMETRO
+    media_atribuicao = TEMPO_TOTAL / N
+
+    // Medir tempo de escrita na tela
+    INICIAR_CRONÔMETRO
+    REPETIR N VEZES:
+        ESCREVER(c)  // Escreve caractere na tela
+    PARAR_CRONÔMETRO
+    media_write = TEMPO_TOTAL / N
+
+    // Mostrar resultados
+    MOSTRAR "Tempo médio atribuição: ", media_atribuicao, " segundos"
+    MOSTRAR "Tempo médio escrita na tela: ", media_write, " segundos"
+    MOSTRAR "Uma escrita na tela equivale a ", media_write / media_atribuicao, " atribuições"
+
+    // Observação
+    MOSTRAR "Atribuições são mais rápidas pois não envolvem o sistema operacional."
+FIM
