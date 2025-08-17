@@ -1,0 +1,42 @@
+#Autor: Gabriel Santos Pereira
+#Matricula: 2022061122
+#Exercicio 01 de ATR
+#-----------------------------------------------#
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
+
+// Globais
+int g_uninit;          // BSS (não inicializada)
+int g_init = 42;       // DATA (inicializada)
+
+// Função dummy para pegar endereço de código
+void dummy_func(void) {
+    return;
+}
+
+int main() {
+    time_t now = time(NULL);
+    printf("=== Mapa de Memória ===\n");
+    printf("Data/Hora: %s", ctime(&now));
+
+    // Stack
+    int local_stack = 123;
+
+    // Heap
+    void *p_heap = malloc(128);
+    void *heap_brk = sbrk(0);
+
+    // Prints
+    printf("[CODE ] Endereço de dummy_func:       %p\n", (void*)dummy_func);
+    printf("[DATA ] Global inicializada g_init:   %p\n", (void*)&g_init);
+    printf("[BSS  ] Global não inicializada g_uninit: %p\n", (void*)&g_uninit);
+    printf("[HEAP ] malloc(128):                  %p\n", p_heap);
+    printf("[HEAP ] topo do heap sbrk(0):         %p\n", heap_brk);
+    printf("[STACK] Variável local:               %p\n", (void*)&local_stack);
+
+    free(p_heap);
+    return 0;
+}
